@@ -12,7 +12,8 @@ OpenGLESContext::OpenGLESContext(uint64 window, uint32 major, uint32 minor)
     eglInitialize(display, 0, 0);
 
     EGLint attr[] = {       // some attributes to set up our egl-interface
-       EGL_BUFFER_SIZE, 16,
+       EGL_BUFFER_SIZE, 32,
+       EGL_DEPTH_SIZE, 16,
        EGL_RENDERABLE_TYPE,
        EGL_OPENGL_ES2_BIT,
        EGL_NONE
@@ -35,8 +36,8 @@ OpenGLESContext::OpenGLESContext(uint64 window, uint32 major, uint32 minor)
 
     //// egl-contexts collect all state descriptions needed required for operation
     EGLint ctxattr[] = {
-       EGL_CONTEXT_MAJOR_VERSION, major,
-       EGL_CONTEXT_MINOR_VERSION, minor,
+       EGL_CONTEXT_MAJOR_VERSION, (int32) major,
+       EGL_CONTEXT_MINOR_VERSION, (int32) minor,
        EGL_NONE
     };
     context = eglCreateContext (display, ecfg, EGL_NO_CONTEXT, ctxattr );
