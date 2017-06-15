@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Veritas/Definitions/Definitions.h>
+#include <stack>
 
 namespace Veritas {
     namespace OpenGL {
@@ -11,6 +12,9 @@ namespace Veritas {
 
                 void swapBuffers();
                 void makeCurrent();
+
+                static void push();
+                static void pop();
             private:
                 void* display;
                 void* surface;

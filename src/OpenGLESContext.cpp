@@ -49,8 +49,25 @@ OpenGLESContext::OpenGLESContext(uint64 window, uint32 major, uint32 minor)
 OpenGLESContext::~OpenGLESContext() {
     eglDestroyContext(display, context);
     eglDestroySurface(display, surface);
-    eglTerminate(display);
+    eglTerminate(display);    
 }
 
 void OpenGLESContext::makeCurrent() { eglMakeCurrent(display, surface, surface, context); }
 void OpenGLESContext::swapBuffers() { eglSwapBuffers(display, surface); }
+
+thread_local std::stack<void*> contextes;
+
+void OpenGLESContext::push() {
+    contextes.push(eglGetCurrentContext());
+    contextes.push(eglGetCurrentDisplay());
+    contextes.push(eglGetCurrentSurface(EGL_DRAW));
+    contextes.push(eglGetCurrentSurface(EGL_READ));
+}
+
+void OpenGLESContext::pop() {
+    EGLSurface read = contextes.top(); contextes.pop();
+    EGLSurface draw = contextes.top(); contextes.pop();
+    EGLDisplay display = contextes.top(); contextes.pop();
+    EGLContext context = contextes.top(); contextes.pop();
+    eglMakeCurrent(display, draw, read, context);
+}
