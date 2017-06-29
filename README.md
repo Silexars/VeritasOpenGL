@@ -1,2 +1,3 @@
 # VeritasOpenGL
-An OpenGL module
+
+A library for creating OpenGL contexts
