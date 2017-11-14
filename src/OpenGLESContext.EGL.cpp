@@ -1,3 +1,5 @@
+#include <Veritas/OpenGL/Definitions.h>
+#ifdef OPENGLCONTEXT_EGL
 #include <Veritas/OpenGL/OpenGLESContext.h>
 #include <EGL/egl.h>
 #include <iostream>
@@ -71,3 +73,4 @@ void OpenGLESContext::pop() {
     EGLContext context = contextes.top(); contextes.pop();
     eglMakeCurrent(display, draw, read, context);
 }
+#endif OPENGLCONTEXT_EGL
