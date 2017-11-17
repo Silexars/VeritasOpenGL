@@ -45,9 +45,6 @@ void OpenGLContext::swapBuffers() {
     SwapBuffers((HDC) dc);
 }
 
-void OpenGLContext::push() {}
-void OpenGLContext::pop() {}
-
 void* OpenGLContext::getProcAddress(const char *name) { return wglGetProcAddress(name); }
 
 #endif
