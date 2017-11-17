@@ -1,20 +1,18 @@
 #pragma once
 
 #include <Veritas/Definitions/Definitions.h>
+#include <Veritas/OpenGL/IOpenGLContext.h>
 #include <stack>
 
 namespace Veritas {
     namespace OpenGL {
-        class OpenGLESContext {
+        class OpenGLESContext : public IOpenGLContext {
             public:
                 OpenGLESContext(uint64 window, uint32 major, uint32 minor);
                 ~OpenGLESContext();
 
                 void swapBuffers();
                 void makeCurrent();
-
-                static void push();
-                static void pop();
             private:
                 void* display;
                 void* surface;

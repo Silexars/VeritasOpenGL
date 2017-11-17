@@ -12,9 +12,6 @@ namespace Veritas {
                 void swapBuffers();
                 void makeCurrent();
 
-                static void push();
-                static void pop();
-
                 static void* getProcAddress(const char* name);
             private:
                 uint64 gl, dc;
